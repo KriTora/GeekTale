@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Window</class>
+ <widget class="QMainWindow" name="Window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="gamewindow">
+   <property name="minimumSize">
+    <size>
+     <width>720</width>
+     <height>480</height>
+    </size>
+   </property>
+   <widget class="QStackedWidget" name="pagestack">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>24</y>
+      <width>684</width>
+      <height>432</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="titlescreen">
+     <widget class="QLabel" name="gametitle">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>43</y>
+        <width>684</width>
+        <height>64</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 77px</string>
+      </property>
+      <property name="text">
+       <string>GeekTale</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="version">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>416</y>
+        <width>64</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>12.07.2022, 08:01 p.m.
+Dashboard Confessional</string>
+      </property>
+      <property name="text">
+       <string>0.1</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_2"/>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
