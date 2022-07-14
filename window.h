@@ -20,6 +20,14 @@ public:
 private:
     Ui::Window *ui;
     void resizeEvent(QResizeEvent*);
+    void connect(); // соединяет все сигналы и слоты
+
+private slots:
+    // навигационная панель
+    void backtotitle(); // главное меню
+
+    // главное меню
+    void newgame(); // сбрасывает все параметры игрока и запускает игровую сессию
 };
 
 #endif // WINDOW_H

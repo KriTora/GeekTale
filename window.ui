@@ -29,6 +29,9 @@
       <height>432</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
     <widget class="QWidget" name="titlescreen">
      <widget class="QLabel" name="gametitle">
       <property name="geometry">
@@ -59,15 +62,80 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>12.07.2022, 08:01 p.m.
-Dashboard Confessional</string>
+       <string>14.07.2022, 11:48 a.m.
+Panic! At the Disco</string>
       </property>
       <property name="text">
-       <string>0.1</string>
+       <string>0.1.5</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_newgame">
+      <property name="geometry">
+       <rect>
+        <x>256</x>
+        <y>194</y>
+        <width>171</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px</string>
+      </property>
+      <property name="text">
+       <string>Новая игра</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_quit">
+      <property name="geometry">
+       <rect>
+        <x>256</x>
+        <y>228</y>
+        <width>171</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px</string>
+      </property>
+      <property name="text">
+       <string>Выйти</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_2"/>
+    <widget class="QWidget" name="mainscreen"/>
+   </widget>
+   <widget class="QFrame" name="navigation">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>408</y>
+      <width>684</width>
+      <height>48</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="btn_backtotitle">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>64</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 12px</string>
+     </property>
+     <property name="text">
+      <string>Главное
+меню</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
