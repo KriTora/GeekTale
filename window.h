@@ -4,6 +4,9 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QResizeEvent>
+#include <QTimer>
+
+#include "date.h"
 
 namespace Ui {
 class Window;
@@ -19,10 +22,16 @@ public:
 
 private:
     Ui::Window *ui;
+    QTimer *tick_timer;
+    Date date; // игровой календарь
+
     void resizeEvent(QResizeEvent*);
     void connect(); // соединяет все сигналы и слоты
 
 private slots:
+    // служебные слоты
+    void tick(); // обновление данных
+
     // навигационная панель
     void backtotitle(); // главное меню
 

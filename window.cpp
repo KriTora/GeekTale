@@ -7,6 +7,8 @@ Window::Window(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    tick_timer = new QTimer();
+
     connect();
     backtotitle();
 }
@@ -14,6 +16,7 @@ Window::Window(QWidget *parent) :
 Window::~Window()
 {
     delete ui;
+    delete tick_timer;
 }
 
 void Window::resizeEvent(QResizeEvent*)
@@ -24,7 +27,7 @@ void Window::resizeEvent(QResizeEvent*)
     ui->pagestack->resize(int(size().rwidth() * 0.95), int(size().rheight() * 0.9));
     ui->pagestack->move(int((size().rwidth() - ui->pagestack->width()) / 2), int((size().rheight() - ui->pagestack->height()) / 2));
 
-    // навигационная панель
+    // ***навигационная панель***
     // навигационная панель занимает 95% ширины окна и 10% высоты окна;
     // располагается в середине по горизонтали и (высота стака - его Y) по вертикали
     // размер кнопок кнопок: 9,5% ширины панели, 100% высоты панели;
@@ -60,10 +63,29 @@ void Window::resizeEvent(QResizeEvent*)
     ui->btn_quit->resize(int(ui->pagestack->width() * 0.25), int(ui->pagestack->height() * 0.08));
     ui->btn_quit->move(int((ui->pagestack->width() - ui->btn_quit->width()) / 2 ), ui->btn_newgame->height() + ui->btn_newgame->y());
     ui->btn_quit->setStyleSheet("font-size: " + QString::number(int(ui->btn_quit->height() * 0.44)) + "px");
+
+    // ***главная вкладка***
+    // лейблы: ширина - 100% стака, высота - 4% стака; отступ сверху - 10% высоты стака (только первый лейбл); шрифт: 100% высоты лейбла
+    // дата
+    ui->lbl_date->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+    ui->lbl_date->move(0, int(ui->pagestack->height() * 0.1));
+    ui->lbl_date->setStyleSheet("font-size: " + QString::number(int(ui->lbl_date->height())) + "px; border-top: 1px solid black");
+    ui->lbl_date_calendar->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+    ui->lbl_date_calendar->move(0, ui->lbl_date->height() + ui->lbl_date->y() + int(ui->date_divide->height() / 2));
+    ui->lbl_date_calendar->setStyleSheet("font-size: " + QString::number(int(ui->lbl_date->height())) + "px; border: none;  border-bottom: 1px solid black;");
+
+    // разделительные линии: 20% ширина стака, 1% высоты стака; располагаются в середине по горизонтали и
+    // (высота + Y родительского лейбла) по вертикали
+    // дата
+    ui->date_divide->resize(int(ui->pagestack->width() * 0.2), int(ui->pagestack->height() * 0.01));
+    ui->date_divide->move(int((ui->pagestack->width() - ui->date_divide->width()) / 2), ui->lbl_date->height() + ui->lbl_date->y());
 }
 
 void Window::connect()
 {
+    // служебные слоты
+    QObject::connect(tick_timer, &QTimer::timeout, this, &Window::tick);
+
     // навигационная панель
     QObject::connect(ui->btn_backtotitle, &QPushButton::clicked, this, &Window::backtotitle);
 

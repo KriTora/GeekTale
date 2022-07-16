@@ -13,12 +13,18 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="gamewindow">
    <property name="minimumSize">
     <size>
      <width>720</width>
      <height>480</height>
     </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <widget class="QStackedWidget" name="pagestack">
     <property name="geometry">
@@ -62,11 +68,11 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>14.07.2022, 11:48 a.m.
-Panic! At the Disco</string>
+       <string>16.07.2022, 9:31 p.m.
+Nickelback</string>
       </property>
       <property name="text">
-       <string>0.1.5</string>
+       <string>0.1.9</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btn_newgame">
@@ -102,7 +108,71 @@ Panic! At the Disco</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="mainscreen"/>
+    <widget class="QWidget" name="mainscreen">
+     <widget class="QLabel" name="lbl_date">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>43</y>
+        <width>684</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px; border-top: 1px solid black;</string>
+      </property>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="Line" name="date_divide">
+      <property name="geometry">
+       <rect>
+        <x>278</x>
+        <y>60</y>
+        <width>136</width>
+        <height>4</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_date_calendar">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>64</y>
+        <width>684</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px; border: none;  border-bottom: 1px solid black;</string>
+      </property>
+      <property name="text">
+       <string>01.01.2000</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QFrame" name="navigation">
     <property name="geometry">
@@ -112,6 +182,9 @@ Panic! At the Disco</string>
       <width>684</width>
       <height>48</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -129,7 +202,7 @@ Panic! At the Disco</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font-size: 12px</string>
+      <string notr="true">font-size: 12px;</string>
      </property>
      <property name="text">
       <string>Главное
