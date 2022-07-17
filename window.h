@@ -6,7 +6,9 @@
 #include <QResizeEvent>
 #include <QTimer>
 
+#include "ui_window.h"
 #include "date.h"
+#include "player.h"
 
 namespace Ui {
 class Window;
@@ -23,9 +25,14 @@ public:
 private:
     Ui::Window *ui;
     QTimer *tick_timer;
-    Date date; // игровой календарь
 
-    void resizeEvent(QResizeEvent*);
+    Date date; // игровой календарь
+    Player player; // все характеристики игрока собраны в этом объекте
+
+    void resizeEvent(QResizeEvent*); // ресайз ивент; вызывается при изменении размера окна; все ресайз ивенты, описанные ниже, выполняют конкретную работу внутри главного ресайз ивента
+    void resizeMainLabelcards(QFrame*, QLabel*, QLabel*, QLabel* = nullptr); // обработка размера и расположения карточек (например карточка даты - связка двух лейблов и линии)
+    void resizeTitleMainButtons(QPushButton*, QPushButton* = nullptr); // обработка размера основных кнопок в главном меню
+
     void connect(); // соединяет все сигналы и слоты
 
 private slots:

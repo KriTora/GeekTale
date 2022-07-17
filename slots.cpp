@@ -3,11 +3,15 @@
 
 void Window::tick()
 {
+    // календарь
     date.new_day();
     ui->lbl_date_calendar->setText(date.getDateString());
     ui->lbl_date_calendar->setToolTip(date.getDateTooltip());
 
-    qDebug() << "***Tick*** " << date.getDateString();
+    // деньги
+    ui->lbl_money_account->setText(player.getMoney());
+
+    qDebug() << "Tick " << date.getDateString();
 }
 
 void Window::backtotitle()
@@ -23,11 +27,13 @@ void Window::backtotitle()
 void Window::newgame()
 {
     date.reset();
-    tick_timer->start(1000); // 1 тик = 1000 мс
+    player.reset();
 
     ui->pagestack->setCurrentIndex(1);
     ui->navigation->show();
     setWindowTitle("Главная");
+
+    tick_timer->start(1000); // 1 тик = 1000 мс
 
     qDebug() << "Starting a new game";
 }

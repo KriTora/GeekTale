@@ -1,5 +1,4 @@
 #include "window.h"
-#include "ui_window.h"
 
 Window::Window(QWidget *parent) :
     QMainWindow(parent),
@@ -21,19 +20,22 @@ Window::~Window()
 
 void Window::resizeEvent(QResizeEvent*)
 {
+    // некоторые элементы интерфейса существуют в единственном экземпляре (например название игры или навигационная панель),
+    // поэтому я написал не все ресайз-методы - считаю, что они не нужны и лучше для таких элементов написать поведение прямо здесь
     qDebug() << "New window size: " << size().rwidth() << "x" << size().rheight();
 
-    // стак занимает 95% окна по ширине и 90% по высоте; располагается в центре окна
+    // ***стак***
+    // он анимает 95% окна по ширине и 90% по высоте; располагается в центре окна
     ui->pagestack->resize(int(size().rwidth() * 0.95), int(size().rheight() * 0.9));
     ui->pagestack->move(int((size().rwidth() - ui->pagestack->width()) / 2), int((size().rheight() - ui->pagestack->height()) / 2));
 
-    // ***навигационная панель***
+
+    // ***навигационная панель*** (для кнопок внутри навигационной панели написать ресайз-метод, потому что кнопок будет несколько)
     // навигационная панель занимает 95% ширины окна и 10% высоты окна;
     // располагается в середине по горизонтали и (высота стака - его Y) по вертикали
     // размер кнопок кнопок: 9,5% ширины панели, 100% высоты панели;
     // первая кнопка не имеет отступа от края
     // размер шрифта: 25% от высоты кнопки
-
     ui->navigation->resize(int(size().rwidth() * 0.95), int(size().rheight() * 0.1));
     ui->navigation->move(int((size().rwidth() - ui->navigation->width()) / 2), ui->pagestack->height() - ui->pagestack->y());
 
@@ -41,44 +43,28 @@ void Window::resizeEvent(QResizeEvent*)
     ui->btn_backtotitle->resize(ui->navigation->width() * 0.095, ui->navigation->height());
     ui->btn_backtotitle->setStyleSheet("font-size: " + QString::number(int(ui->btn_backtotitle->height() * 0.25)) + "px");
 
-    // *****главное меню*****
-    // название игры занимает 100% ширины стака и 15% высоты стака; не имеет отступов по горизонтали, отступ сверху - 10% высоты стака;
-    // размер шрифта - 18% высоты стака
+
+    // ***главное меню***
+    // кнопка Новая игра
+    resizeTitleMainButtons(ui->btn_newgame);
+    // кнопка Выйти
+    resizeTitleMainButtons(ui->btn_quit, ui->btn_newgame);
+    // название игры
+    // название занимает 100% от ширины стака и 15% от высоты стака; не имеет отступов по горизонтали, отступ сверху: 10% от высоты стака;
+    // размер шрифта: 18% от высоты стака
     ui->gametitle->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.15));
     ui->gametitle->move(0, int(ui->pagestack->height() * 0.10));
     ui->gametitle->setStyleSheet("font-size: " + QString::number(int(ui->pagestack->height() * 0.18)) + "px");
-
-    // лейбл версии не меняет размер, но перемещается так, чтобы всегда быть в левом нижнем углу стака
+    // версия
+    // этот лейбл не меняет размер, но перемещается так, чтобы всегда быть в левом нижнем углу стака
     ui->version->move(0, ui->pagestack->height() - ui->version->height());
 
-    // основные кнопки: 25% ширины стака, 8% высоты стака; расположены в середине по горизонтали;
-    // по вертикали: первая кнопка - 45% высоты стака; следующие - (высота предыдущей кнопки + её кооридана Y)
-    // размер шрифта: 44% от высоты кнопки
-    // новая игра
-    ui->btn_newgame->resize(int(ui->pagestack->width() * 0.25), int(ui->pagestack->height() * 0.08));
-    ui->btn_newgame->move(int((ui->pagestack->width() - ui->btn_newgame->width()) / 2 ), int(ui->pagestack->height() * 0.45));
-    ui->btn_newgame->setStyleSheet("font-size: " + QString::number(int(ui->btn_newgame->height() * 0.44)) + "px");
 
-    // выйти
-    ui->btn_quit->resize(int(ui->pagestack->width() * 0.25), int(ui->pagestack->height() * 0.08));
-    ui->btn_quit->move(int((ui->pagestack->width() - ui->btn_quit->width()) / 2 ), ui->btn_newgame->height() + ui->btn_newgame->y());
-    ui->btn_quit->setStyleSheet("font-size: " + QString::number(int(ui->btn_quit->height() * 0.44)) + "px");
-
-    // ***главная вкладка***
-    // лейблы: ширина - 100% стака, высота - 4% стака; отступ сверху - 10% высоты стака (только первый лейбл); шрифт: 100% высоты лейбла
+    // ***главная (карточки)***
     // дата
-    ui->lbl_date->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
-    ui->lbl_date->move(0, int(ui->pagestack->height() * 0.1));
-    ui->lbl_date->setStyleSheet("font-size: " + QString::number(int(ui->lbl_date->height())) + "px; border-top: 1px solid black");
-    ui->lbl_date_calendar->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
-    ui->lbl_date_calendar->move(0, ui->lbl_date->height() + ui->lbl_date->y() + int(ui->date_divide->height() / 2));
-    ui->lbl_date_calendar->setStyleSheet("font-size: " + QString::number(int(ui->lbl_date->height())) + "px; border: none;  border-bottom: 1px solid black;");
-
-    // разделительные линии: 20% ширина стака, 1% высоты стака; располагаются в середине по горизонтали и
-    // (высота + Y родительского лейбла) по вертикали
-    // дата
-    ui->date_divide->resize(int(ui->pagestack->width() * 0.2), int(ui->pagestack->height() * 0.01));
-    ui->date_divide->move(int((ui->pagestack->width() - ui->date_divide->width()) / 2), ui->lbl_date->height() + ui->lbl_date->y());
+    resizeMainLabelcards(ui->date_divide, ui->lbl_date, ui->lbl_date_calendar);
+    // деньги
+    resizeMainLabelcards(ui->money_divide, ui->lbl_money, ui->lbl_money_account, ui->lbl_date_calendar);
 }
 
 void Window::connect()
@@ -92,4 +78,88 @@ void Window::connect()
     // главное меню
     QObject::connect(ui->btn_newgame, &QPushButton::clicked, this, &Window::newgame);
     QObject::connect(ui->btn_quit, &QPushButton::clicked, this, &QApplication::quit);
+
+}
+
+void Window::resizeMainLabelcards(QFrame* d, QLabel* l1, QLabel* l2, QLabel* l3)
+{
+    // d = разделительная линия
+    // l1 & l2 & l3 = соответственно устанавливаемые лейблы (1 - над и 2 - под линией) и предыдущий лейбл
+
+    // если метод вызывается с тремя аргументоми, то лейблы располагаются по правилам (только первая карточка!):
+    // ширина - 100% стака, высота - 4% стака; шрифт - 100% высоты лейбла;
+    // отступ сверху первого лейбла - 10% высоты стака;
+    // отступ сверху второго лейбла - (высота + Y) первого лейбла + (высота / 2) разделительной линии
+
+    // разделительная линия всегда устанавливается по правилам:
+    // 20% от ширины стака, 1% от высоты стака; располагается в середине по горизонтали и (высота + Y верхнего лейбла) по вертикали
+
+    // если вызов производится с четырьмя аргументами, то правило определения отступа сверху для первого лейбла меняется:
+    // (высота + Y) предыдущего лейбла + 10% высоты нового лейбла
+
+    if (l3 == nullptr)
+    {
+        // первая карточка
+
+        // сверху от линии
+        l1->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+        l1->move(0, int(ui->pagestack->height() * 0.1));
+        l1->setStyleSheet("font-size: " + QString::number(int(l1->height())) + "px; border-top: 1px solid black");
+
+        // линия
+        d->resize(int(ui->pagestack->width() * 0.2), int(ui->pagestack->height() * 0.01));
+        d->move(int((ui->pagestack->width() - d->width()) / 2), l1->height() + l1->y());
+
+        // снизу от линии
+        l2->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+        l2->move(0, l1->height() + l1->y() + (d->height() / 2));
+        l2->setStyleSheet("font-size: " + QString::number(int(l2->height())) + "px; border: none;  border-bottom: 1px solid black;");
+    }
+    else
+    {
+        // не первая карточка
+
+        // сверху от линии
+        l1->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+        l1->move(0, l3->height() + l3->y() + int(l1->height() * 0.1));
+        l1->setStyleSheet("font-size: " + QString::number(int(l1->height())) + "px; border-top: 1px solid black");
+
+        // линия
+        d->resize(int(ui->pagestack->width() * 0.2), int(ui->pagestack->height() * 0.01));
+        d->move(int((ui->pagestack->width() - d->width()) / 2), l1->height() + l1->y());
+
+        // снизу от линии
+        l2->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.04));
+        l2->move(0, l1->height() + l1->y() + (d->height() / 2));
+        l2->setStyleSheet("font-size: " + QString::number(int(l2->height())) + "px; border: none;  border-bottom: 1px solid black;");
+    }
+}
+
+void Window::resizeTitleMainButtons(QPushButton* b1, QPushButton* b2)
+{
+    // если метод вызывается с одним аргументом, то считается, что эта кнопка будет первой в меню - она будет самой верхней
+    // в таком случае применяются правила:
+    // размер: 25% от ширины стака, 8% высоты стака;
+    // расположение: в середине по горизонтали, по вертикали - на 45% от высоты стака
+    // шрифт: 44% от высоты кнопки
+
+    // если метод вызывается с двумя аргументами, то b1 - добавляемая кнопка, а b2 - кнопка, расположенная выше добавляемой
+    // в таком случае расположение кнопки по горизонтали определяется по формуле (высота + y) b2
+
+    if (b2 == nullptr)
+    {
+        // первая кнопка
+
+        b1->resize(int(ui->pagestack->width() * 0.25), int(ui->pagestack->height() * 0.08));
+        b1->move(int((ui->pagestack->width() - b1->width()) / 2 ), int(ui->pagestack->height() * 0.45));
+        b1->setStyleSheet("font-size: " + QString::number(int(b1->height() * 0.44)) + "px");
+    }
+    else
+    {
+        // не первая кнопка
+
+        b1->resize(int(ui->pagestack->width() * 0.25), int(ui->pagestack->height() * 0.08));
+        b1->move(int((ui->pagestack->width() - b1->width()) / 2 ), b2->height() + b2->y());
+        b1->setStyleSheet("font-size: " + QString::number(int(b1->height() * 0.44)) + "px");
+    }
 }
