@@ -11,6 +11,9 @@ void Window::tick()
     // деньги
     ui->lbl_money_account->setText(player.getMoney());
 
+    //опыт
+    ui->lbl_xp_account->setText(player.getXp());
+
     qDebug() << "Tick " << date.getDateString();
 }
 

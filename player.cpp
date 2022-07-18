@@ -7,5 +7,6 @@ Player::Player()
 
 void Player::reset()
 {
-    money = 0;
+    money = 0,
+    xp = 0;
 }

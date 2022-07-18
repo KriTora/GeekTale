@@ -68,11 +68,11 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>17.07.2022, 9:51 p.m.
-Chata</string>
+       <string>18.07.2022, 6:18 p.m.
+The Cab</string>
       </property>
       <property name="text">
-       <string>0.2</string>
+       <string>0.2.2</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btn_newgame">
@@ -229,7 +229,70 @@ Chata</string>
        <string notr="true">font-size: 14px; border: none;  border-bottom: 1px solid black;</string>
       </property>
       <property name="text">
-       <string>xxxx р.</string>
+       <string>x р.</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_xp">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>136</y>
+        <width>684</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px; border-top: 1px solid black;</string>
+      </property>
+      <property name="text">
+       <string>Опыт</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="Line" name="xp_divide">
+      <property name="geometry">
+       <rect>
+        <x>278</x>
+        <y>157</y>
+        <width>136</width>
+        <height>4</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_xp_account">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>159</y>
+        <width>684</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px; border: none;  border-bottom: 1px solid black;</string>
+      </property>
+      <property name="text">
+       <string>x</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -270,6 +333,22 @@ Chata</string>
      <property name="text">
       <string>Главное
 меню</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_toJob">
+     <property name="geometry">
+      <rect>
+       <x>74</x>
+       <y>0</y>
+       <width>64</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 12px;</string>
+     </property>
+     <property name="text">
+      <string>Работа</string>
      </property>
     </widget>
    </widget>

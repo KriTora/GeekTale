@@ -67,7 +67,7 @@ QString Date::getDateString()
 
 QString Date::getDateTooltip()
 {
-    QString result = getDateString() + "\n" + week[day_of_week] + "\n\n";
+    QString result = getDateString() + "\n" + week[day_of_week] + "\n";
     result += "С начала Вашей истории ";
 
     // извлечение последних двух цифр для подбора правильных слов
