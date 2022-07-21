@@ -30,6 +30,12 @@ void Window::resizeEvent(QResizeEvent*)
     ui->pagestack->move(int((size().rwidth() - ui->pagestack->width()) / 2), int((size().rheight() - ui->pagestack->height()) / 2));
 
 
+    // ***верхние заголовки вкладок***
+    resizeTopstrings(ui->lbl_mainTopstring);
+    resizeTopstrings(ui->lbl_jobTopstring);
+
+
+
     // ***навигационная панель*** (в будущем - переписать ресайз-метод так, чтобы кнопки располагались красиво)
     // навигационная панель занимает 95% от ширины окна и 10% от высоты;
     // располагается в середине по горизонтали и (высота стака - его Y) по вертикали
@@ -37,7 +43,11 @@ void Window::resizeEvent(QResizeEvent*)
     ui->navigation->move(int((size().rwidth() - ui->navigation->width()) / 2), ui->pagestack->height() - ui->pagestack->y());
     // кнопка Главное меню
     resizeNavigationButtons(ui->btn_backtotitle);
-    resizeNavigationButtons(ui->btn_toJob, ui->btn_backtotitle);
+    // кнопка Главная
+    resizeNavigationButtons(ui->btn_toMain, ui->btn_backtotitle);
+    // кнопка Работа
+    resizeNavigationButtons(ui->btn_toJob, ui->btn_toMain);
+
 
 
     // ***главное меню***
@@ -63,6 +73,17 @@ void Window::resizeEvent(QResizeEvent*)
     resizeMainLabelcards(ui->money_divide, ui->lbl_money, ui->lbl_money_account, ui->lbl_date_calendar);
     // опыт
     resizeMainLabelcards(ui->xp_divide, ui->lbl_xp, ui->lbl_xp_account, ui->lbl_money_account);
+}
+
+void Window::resizeTopstrings(QLabel* l)
+{
+    // ширина: 100% от стака, высота: 7% от стака
+    // отступы: нет
+    // размер шрифта: 66% от высоты лейбла
+
+    l->resize(ui->pagestack->width(), int(ui->pagestack->height() * 0.07));
+    l->move(0, 0);
+    l->setStyleSheet("font-size: " + QString::number(int(l->height() * 0.66)) + "px;");
 }
 
 void Window::resizeMainLabelcards(QFrame* d, QLabel* l1, QLabel* l2, QLabel* l3)
@@ -170,9 +191,17 @@ void Window::resizeNavigationButtons(QPushButton* b1, QPushButton* b2)
         // не первая кнопка
 
         b1->resize(ui->navigation->width() * 0.095, ui->navigation->height());
-        b1->move(b2->width() + b2->y() + int(b1->width() * 0.1), 0);
+        b1->move(b2->width() + b2->x() + int(b1->width() * 0.1), 0);
         b1->setStyleSheet("font-size: " + QString::number(int(b1->height() * 0.25)) + "px");
     }
+}
+
+void Window::reloadNavigation()
+{
+    // пока что будет так, позже, возможно, перепишу повторную активацию кнопок
+
+    ui->btn_toMain->setEnabled(true);
+    ui->btn_toJob->setEnabled(true);
 }
 
 void Window::connect()
@@ -184,6 +213,8 @@ void Window::connect()
 
     // навигационная панель
     QObject::connect(ui->btn_backtotitle, &QPushButton::clicked, this, &Window::backtotitle);
+    QObject::connect(ui->btn_toMain, &QPushButton::clicked, this, &Window::toMain);
+    QObject::connect(ui->btn_toJob, &QPushButton::clicked, this, &Window::toJob);
 
     // главное меню
     QObject::connect(ui->btn_newgame, &QPushButton::clicked, this, &Window::newgame);

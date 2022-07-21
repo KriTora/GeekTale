@@ -17,6 +17,24 @@ void Window::tick()
     qDebug() << "Tick " << date.getDateString();
 }
 
+void Window::newgame()
+{
+    date.reset();
+    player.reset();
+
+    ui->pagestack->setCurrentIndex(1);
+    ui->navigation->show();
+    setWindowTitle("Главная");
+
+    reloadNavigation();
+    ui->btn_toMain->setEnabled(false);
+
+    tick_timer->start(1000); // 1 тик = 1000 мс
+
+    qDebug() << "Starting a new game";
+}
+
+// ***навигационная панель***
 void Window::backtotitle()
 {
     tick_timer->stop(); // заморозка времени в игре
@@ -27,16 +45,24 @@ void Window::backtotitle()
     qDebug() << "Going to title screen";
 }
 
-void Window::newgame()
+void Window::toMain()
 {
-    date.reset();
-    player.reset();
-
     ui->pagestack->setCurrentIndex(1);
-    ui->navigation->show();
     setWindowTitle("Главная");
 
-    tick_timer->start(1000); // 1 тик = 1000 мс
+    reloadNavigation();
+    ui->btn_toMain->setEnabled(false);
 
-    qDebug() << "Starting a new game";
+    qDebug() << "Going to main screen";
+}
+
+void Window::toJob()
+{
+    ui->pagestack->setCurrentIndex(2);
+    setWindowTitle("Работа");
+
+    reloadNavigation();
+    ui->btn_toJob->setEnabled(false);
+
+    qDebug() << "Going to job screen";
 }

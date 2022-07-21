@@ -30,9 +30,12 @@ private:
     Player player; // хранит в себе все данные об игроке
 
     void resizeEvent(QResizeEvent*); // ниже описаны ресайз-методы для различных элементов UI
-    void resizeMainLabelcards(QFrame*, QLabel*, QLabel*, QLabel* = nullptr); // обработка размера и расположения карточек (например карточка даты - связка двух лейблов и линии)
+    void resizeTopstrings(QLabel*); // обработка размера/расположения верхнего заголовка в каждой вкладке
+    void resizeMainLabelcards(QFrame*, QLabel*, QLabel*, QLabel* = nullptr); // обработка карточек (например карточка даты - связка двух лейблов и линии)
     void resizeTitleMainButtons(QPushButton*, QPushButton* = nullptr); // обработка основных кнопок в главном меню
     void resizeNavigationButtons(QPushButton*, QPushButton* = nullptr); // обработка кнопок навигации
+
+    void reloadNavigation(); // разблокировка всех кнопок на навигационной панели
 
     void connect(); // соединяет все сигналы и слоты
 
@@ -40,11 +43,13 @@ private slots:
     // служебные слоты
     void tick(); // обновление данных
 
-    // слоты навигационной панели
-    void backtotitle(); // главное меню
-
     // слоты главного меню
     void newgame(); // сбрасывает все параметры игрока и запускает игровую сессию
+
+    // слоты навигационной панели
+    void backtotitle(); // главное меню
+    void toMain(); // главная
+    void toJob(); // работа
 };
 
 #endif // WINDOW_H

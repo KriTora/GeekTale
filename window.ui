@@ -68,11 +68,11 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>18.07.2022, 6:18 p.m.
-The Cab</string>
+       <string>21.07.2022, 9:44 p.m.
+STARSET</string>
       </property>
       <property name="text">
-       <string>0.2.2</string>
+       <string>0.2.9</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btn_newgame">
@@ -298,6 +298,46 @@ The Cab</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <widget class="QLabel" name="lbl_mainTopstring">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>684</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 20px</string>
+      </property>
+      <property name="text">
+       <string>Ваши главные характеристики</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="jobscreen">
+     <widget class="QLabel" name="lbl_jobTopstring">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>684</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 20px</string>
+      </property>
+      <property name="text">
+       <string>Список вакансий</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QFrame" name="navigation">
@@ -349,6 +389,22 @@ The Cab</string>
      </property>
      <property name="text">
       <string>Работа</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_toMain">
+     <property name="geometry">
+      <rect>
+       <x>144</x>
+       <y>0</y>
+       <width>64</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 12px;</string>
+     </property>
+     <property name="text">
+      <string>Главная</string>
      </property>
     </widget>
    </widget>
